@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#667eea">
-    <title>Beach Bugs Field Data</title>
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="icon-192.png">
+    <title>Beach Bugs - Quadrat Data</title>
     <style>
         * {
             margin: 0;
@@ -18,7 +15,7 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding-bottom: 20px;
@@ -286,9 +283,6 @@
             border-radius: 8px;
             margin-bottom: 15px;
             font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
         
         .alert-success {
@@ -334,47 +328,17 @@
             color: #2d3748;
         }
         
-        .modal-text {
-            color: #4a5568;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-        
-        .counter-badge {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-        
         .help-text {
             font-size: 12px;
             color: #718096;
             margin-top: 4px;
         }
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 10px;
-            }
-            
-            .card {
-                padding: 15px;
-            }
-            
-            .cover-grid {
-                grid-template-columns: 1fr;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>🦀 Beach Bugs</h1>
-        <div class="subtitle">Field Data Collection • EVSC 400</div>
+        <h1>🦀 Beach Bugs - Quadrat Data</h1>
+        <div class="subtitle">EVSC 400 Field Data Collection</div>
     </div>
     
     <div class="status-bar" id="statusBar">
@@ -383,14 +347,14 @@
     
     <div class="container">
         <form id="dataForm">
-            <!-- Quick Info -->
+            <!-- Site & Quadrat Info -->
             <div class="card">
-                <div class="section-title">📍 Quadrat Info</div>
+                <div class="section-title">📍 Site & Quadrat Info</div>
                 
                 <div class="form-group">
                     <label>Site ID</label>
                     <select id="siteId" required>
-                        <option value="">Select site...</option>
+                        <option value="">Select...</option>
                         <option value="Site_1">Site 1</option>
                         <option value="Site_2">Site 2</option>
                         <option value="Site_3">Site 3</option>
@@ -407,8 +371,13 @@
                 </div>
                 
                 <div class="form-group">
+                    <label>Site Name <span class="help-text">(backup - e.g., "Belcarra")</span></label>
+                    <input type="text" id="siteName" placeholder="Location name" required>
+                </div>
+                
+                <div class="form-group">
                     <label>Your Name</label>
-                    <input type="text" id="samplerName" placeholder="Who's collecting this data?" required>
+                    <input type="text" id="samplerName" placeholder="Who's collecting this?" required>
                 </div>
                 
                 <div class="form-group">
@@ -461,7 +430,7 @@
             
             <!-- Cover -->
             <div class="card">
-                <div class="section-title">🪨 Cover Estimates</div>
+                <div class="section-title">🪨 Cover Estimates (%)</div>
                 <p class="help-text">Visual estimate, nearest 5%. Should total 100%.</p>
                 
                 <div class="cover-grid">
@@ -482,13 +451,18 @@
                     
                     <div class="form-group">
                         <label>Bare Rock</label>
-                        <input type="number" id="coverBare" min="0" max="100" step="5" value="0" required>
+                        <input type="number" id="coverBareRock" min="0" max="100" step="5" value="0" required>
                     </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>Other</label>
-                    <input type="number" id="coverOther" min="0" max="100" step="5" value="0" required>
+                    
+                    <div class="form-group">
+                        <label>Sand</label>
+                        <input type="number" id="coverSand" min="0" max="100" step="5" value="0" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Other</label>
+                        <input type="number" id="coverOther" min="0" max="100" step="5" value="0" required>
+                    </div>
                 </div>
                 
                 <div class="form-group">
@@ -505,7 +479,7 @@
                 <p class="help-text">Count all visible individuals. Enter 0 if none.</p>
                 
                 <div class="count-item">
-                    <label>Littorine Snails</label>
+                    <label>Snails</label>
                     <input type="number" id="countSnails" min="0" value="0" required>
                 </div>
                 
@@ -515,18 +489,13 @@
                 </div>
                 
                 <div class="count-item">
-                    <label>Dog Whelks</label>
-                    <input type="number" id="countWhelks" min="0" value="0" required>
-                </div>
-                
-                <div class="count-item">
-                    <label>Chitons</label>
-                    <input type="number" id="countChitons" min="0" value="0" required>
-                </div>
-                
-                <div class="count-item">
-                    <label>Small Crabs</label>
+                    <label>Crabs</label>
                     <input type="number" id="countCrabs" min="0" value="0" required>
+                </div>
+                
+                <div class="count-item">
+                    <label>Isopods</label>
+                    <input type="number" id="countIsopods" min="0" value="0" required>
                 </div>
                 
                 <div class="count-item">
@@ -535,18 +504,33 @@
                 </div>
                 
                 <div class="count-item">
-                    <label>Amphipods/Isopods</label>
-                    <input type="number" id="countAmphi" min="0" value="0" required>
+                    <label>Other #1</label>
+                    <input type="number" id="countOther1" min="0" value="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Describe Other #1</label>
+                    <input type="text" id="countOther1Desc" placeholder="e.g., chitons">
                 </div>
                 
                 <div class="count-item">
-                    <label>Other Inverts</label>
-                    <input type="number" id="countOther" min="0" value="0" required>
+                    <label>Other #2</label>
+                    <input type="number" id="countOther2" min="0" value="0" required>
                 </div>
                 
-                <div class="form-group" style="margin-top: 10px;">
-                    <label>Describe "Other"</label>
-                    <input type="text" id="countOtherDesc" placeholder="e.g., small anemone">
+                <div class="form-group">
+                    <label>Describe Other #2</label>
+                    <input type="text" id="countOther2Desc" placeholder="e.g., anemones">
+                </div>
+                
+                <div class="count-item">
+                    <label>Other #3</label>
+                    <input type="number" id="countOther3" min="0" value="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Describe Other #3</label>
+                    <input type="text" id="countOther3Desc" placeholder="e.g., worms">
                 </div>
                 
                 <div class="stats-box">
@@ -564,7 +548,7 @@
             <!-- Notes -->
             <div class="card">
                 <div class="section-title">📝 Notes</div>
-                <textarea id="notes" rows="3" placeholder="Observations, substrate type, wave action, etc."></textarea>
+                <textarea id="notes" rows="3" placeholder="Substrate, wave action, unusual observations..."></textarea>
             </div>
             
             <button type="submit" class="button button-primary">
@@ -576,8 +560,8 @@
             📥 Export All Data (<span id="exportCount">0</span> quadrats)
         </button>
         
-        <button class="button button-secondary" onclick="showViewData()">
-            👁️ View Saved Data
+        <button class="button button-secondary" onclick="window.location.href='site-data.html'">
+            🏖️ Go to Site Data Form
         </button>
     </div>
     
@@ -585,35 +569,21 @@
     <div class="modal" id="exportModal">
         <div class="modal-content">
             <div class="modal-title">📥 Export Data</div>
-            <div class="modal-text">
-                Download <strong><span id="exportModalCount">0</span> quadrats</strong> as CSV file?
-                <br><br>
-                File will open in Excel or Google Sheets.
+            <div style="margin-bottom: 20px;">
+                Download <strong><span id="exportModalCount">0</span> quadrats</strong> as CSV?
             </div>
             <button class="button button-success" onclick="downloadCSV()">Download CSV</button>
             <button class="button button-secondary" onclick="closeModal()">Cancel</button>
         </div>
     </div>
     
-    <!-- View Data Modal -->
-    <div class="modal" id="viewModal">
-        <div class="modal-content" style="max-width: 90%; max-height: 80vh; overflow-y: auto;">
-            <div class="modal-title">Saved Data</div>
-            <div id="dataList"></div>
-            <button class="button button-secondary" onclick="closeModal()" style="margin-top: 15px;">Close</button>
-        </div>
-    </div>
-    
     <script>
-        // Initialize
-        let savedData = JSON.parse(localStorage.getItem('beachBugsData') || '[]');
+        let savedData = JSON.parse(localStorage.getItem('beachBugsQuadrats') || '[]');
         updateCounter();
         
-        // Set today's date
         document.getElementById('date').valueAsDate = new Date();
         
-        // Auto-calculate cover total
-        const coverInputs = ['coverAlgae', 'coverBarnacle', 'coverMussel', 'coverBare', 'coverOther'];
+        const coverInputs = ['coverAlgae', 'coverBarnacle', 'coverMussel', 'coverBareRock', 'coverSand', 'coverOther'];
         coverInputs.forEach(id => {
             document.getElementById(id).addEventListener('input', updateCoverTotal);
         });
@@ -627,16 +597,15 @@
             const check = document.getElementById('totalCheck');
             if (total === 100) {
                 check.className = 'total-check total-good';
-                check.textContent = `✓ Total: ${total}% (Perfect!)`;
+                check.textContent = `✓ Total: ${total}%`;
             } else {
                 check.className = 'total-check total-bad';
                 check.textContent = `Total: ${total}% (Need ${100-total} more)`;
             }
         }
         
-        // Auto-calculate stats
-        const countInputs = ['countSnails', 'countLimpets', 'countWhelks', 'countChitons',
-                             'countCrabs', 'countStars', 'countAmphi', 'countOther'];
+        const countInputs = ['countSnails', 'countLimpets', 'countCrabs', 'countIsopods', 'countStars', 
+                             'countOther1', 'countOther2', 'countOther3'];
         countInputs.forEach(id => {
             document.getElementById(id).addEventListener('input', updateStats);
         });
@@ -655,7 +624,6 @@
             document.getElementById('abundance').textContent = abundance;
         }
         
-        // Photo handling
         const photoInput = document.getElementById('photoInput');
         const photoPreview = document.getElementById('photoPreview');
         const photoSection = document.getElementById('photoSection');
@@ -675,21 +643,19 @@
             }
         });
         
-        // Form submission
         document.getElementById('dataForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Validate cover total
-            const coverTotal = coverInputs.reduce((sum, id) => sum + (parseInt(document.getElementById(id).value) || 0), 0);
+            const coverTotal = coverInputs.reduce((sum, id) => 
+                sum + (parseInt(document.getElementById(id).value) || 0), 0);
             if (coverTotal !== 100) {
-                if (!confirm(`Cover total is ${coverTotal}%. Save anyway?`)) {
-                    return;
-                }
+                if (!confirm(`Cover total is ${coverTotal}%. Save anyway?`)) return;
             }
             
             const formData = {
                 timestamp: new Date().toISOString(),
                 siteId: document.getElementById('siteId').value,
+                siteName: document.getElementById('siteName').value,
                 date: document.getElementById('date').value,
                 samplerName: document.getElementById('samplerName').value,
                 side: document.getElementById('side').value,
@@ -699,31 +665,32 @@
                 coverAlgae: document.getElementById('coverAlgae').value,
                 coverBarnacle: document.getElementById('coverBarnacle').value,
                 coverMussel: document.getElementById('coverMussel').value,
-                coverBare: document.getElementById('coverBare').value,
+                coverBareRock: document.getElementById('coverBareRock').value,
+                coverSand: document.getElementById('coverSand').value,
                 coverOther: document.getElementById('coverOther').value,
                 coverOtherDesc: document.getElementById('coverOtherDesc').value,
                 countSnails: document.getElementById('countSnails').value,
                 countLimpets: document.getElementById('countLimpets').value,
-                countWhelks: document.getElementById('countWhelks').value,
-                countChitons: document.getElementById('countChitons').value,
                 countCrabs: document.getElementById('countCrabs').value,
+                countIsopods: document.getElementById('countIsopods').value,
                 countStars: document.getElementById('countStars').value,
-                countAmphi: document.getElementById('countAmphi').value,
-                countOther: document.getElementById('countOther').value,
-                countOtherDesc: document.getElementById('countOtherDesc').value,
+                countOther1: document.getElementById('countOther1').value,
+                countOther1Desc: document.getElementById('countOther1Desc').value,
+                countOther2: document.getElementById('countOther2').value,
+                countOther2Desc: document.getElementById('countOther2Desc').value,
+                countOther3: document.getElementById('countOther3').value,
+                countOther3Desc: document.getElementById('countOther3Desc').value,
                 richness: document.getElementById('richness').textContent,
                 abundance: document.getElementById('abundance').textContent,
                 notes: document.getElementById('notes').value
             };
             
             savedData.push(formData);
-            localStorage.setItem('beachBugsData', JSON.stringify(savedData));
+            localStorage.setItem('beachBugsQuadrats', JSON.stringify(savedData));
             
-            // Show success
             updateCounter();
             showStatusBar();
             
-            // Reset form
             document.getElementById('dataForm').reset();
             photoPreview.classList.remove('show');
             photoSection.classList.remove('has-photo');
@@ -732,7 +699,6 @@
             updateCoverTotal();
             updateStats();
             
-            // Scroll to top
             window.scrollTo({top: 0, behavior: 'smooth'});
         });
         
@@ -757,33 +723,18 @@
             document.getElementById('exportModal').classList.add('show');
         }
         
-        function showViewData() {
-            if (savedData.length === 0) {
-                alert('No data saved yet!');
-                return;
-            }
-            
-            const list = document.getElementById('dataList');
-            list.innerHTML = savedData.map((d, i) => `
-                <div style="padding: 10px; background: #f7fafc; margin-bottom: 10px; border-radius: 6px;">
-                    <strong>${i+1}. ${d.siteId} - ${d.side} ${d.distance}m</strong><br>
-                    <small>${d.zone} zone • ${d.richness} taxa • ${d.abundance} individuals</small>
-                </div>
-            `).join('');
-            
-            document.getElementById('viewModal').classList.add('show');
-        }
-        
         function closeModal() {
             document.querySelectorAll('.modal').forEach(m => m.classList.remove('show'));
         }
         
         function downloadCSV() {
-            const headers = ['Timestamp', 'Site_ID', 'Date', 'Sampler_Name', 'Side', 'Distance_m', 'Zone',
-                           'Algae_pct', 'Barnacle_pct', 'Mussel_pct', 'BareRock_pct', 'Other_pct', 'Other_Cover_Description',
-                           'Littorine_Snails', 'Limpets', 'Dog_Whelks', 'Chitons', 'Small_Crabs',
-                           'Sea_Stars', 'Amphipods_Isopods', 'Other_Inverts', 'Other_Inverts_Description',
-                           'Species_Richness', 'Total_Abundance', 'Notes'];
+            const headers = ['Timestamp', 'Site_ID', 'Site_Name', 'Date', 'Sampler_Name', 'Side', 
+                           'Distance_m', 'Zone', 'Algae_pct', 'Barnacle_pct', 'Mussel_pct', 
+                           'BareRock_pct', 'Sand_pct', 'Other_pct', 'Other_Cover_Description',
+                           'Snails', 'Limpets', 'Crabs', 'Isopods', 'Sea_Stars',
+                           'Other_1', 'Other_1_Description', 'Other_2', 'Other_2_Description',
+                           'Other_3', 'Other_3_Description', 'Species_Richness', 
+                           'Total_Abundance', 'Notes'];
             
             let csv = headers.join(',') + '\n';
             
@@ -791,6 +742,7 @@
                 const values = [
                     row.timestamp,
                     row.siteId,
+                    `"${row.siteName}"`,
                     row.date,
                     `"${row.samplerName}"`,
                     row.side,
@@ -799,18 +751,21 @@
                     row.coverAlgae,
                     row.coverBarnacle,
                     row.coverMussel,
-                    row.coverBare,
+                    row.coverBareRock,
+                    row.coverSand,
                     row.coverOther,
                     `"${row.coverOtherDesc || ''}"`,
                     row.countSnails,
                     row.countLimpets,
-                    row.countWhelks,
-                    row.countChitons,
                     row.countCrabs,
+                    row.countIsopods,
                     row.countStars,
-                    row.countAmphi,
-                    row.countOther,
-                    `"${row.countOtherDesc || ''}"`,
+                    row.countOther1,
+                    `"${row.countOther1Desc || ''}"`,
+                    row.countOther2,
+                    `"${row.countOther2Desc || ''}"`,
+                    row.countOther3,
+                    `"${row.countOther3Desc || ''}"`,
                     row.richness,
                     row.abundance,
                     `"${row.notes || ''}"`
@@ -822,14 +777,13 @@
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `beach_bugs_data_${new Date().toISOString().split('T')[0]}.csv`;
+            a.download = `beach_bugs_quadrats_${new Date().toISOString().split('T')[0]}.csv`;
             a.click();
             
             closeModal();
             alert(`Downloaded ${savedData.length} quadrats!`);
         }
         
-        // Initialize
         updateCoverTotal();
         updateStats();
     </script>
