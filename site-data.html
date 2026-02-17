@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#48bb78">
+    <title>Beach Bugs - Site Data</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            min-height: 100vh;
+            padding-bottom: 20px;
+        }
+        
+        .header {
+            background: rgba(255,255,255,0.95);
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header h1 {
+            font-size: 20px;
+            color: #2d3748;
+        }
+        
+        .header .subtitle {
+            font-size: 13px;
+            color: #718096;
+            margin-top: 2px;
+        }
+        
+        .status-bar {
+            background: #667eea;
+            color: white;
+            padding: 8px 20px;
+            font-size: 13px;
+            display: none;
+        }
+        
+        .status-bar.show {
+            display: block;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+        
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        input[type="time"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+        
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #48bb78;
+        }
+        
+        .button {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        
+        .button:active {
+            transform: scale(0.97);
+        }
+        
+        .button-primary {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
+        }
+        
+        .button-secondary {
+            background: white;
+            color: #48bb78;
+            border: 2px solid #48bb78;
+            margin-top: 10px;
+        }
+        
+        .button-success {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-top: 10px;
+        }
+        
+        .help-text {
+            font-size: 12px;
+            color: #718096;
+            margin-top: 4px;
+        }
+        
+        .wq-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        .wq-table th {
+            background: #f7fafc;
+            padding: 8px;
+            font-size: 13px;
+            text-align: left;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .wq-table td {
+            padding: 8px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .wq-table input {
+            width: 100%;
+            padding: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏖️ Beach Bugs - Site Data</h1>
+        <div class="subtitle">Site Characteristics & Water Quality</div>
+    </div>
+    
+    <div class="status-bar" id="statusBar">
+        ✓ Site data saved!
+    </div>
+    
+    <div class="container">
+        <form id="siteForm">
+            <!-- Basic Site Info -->
+            <div class="card">
+                <div class="section-title">📍 Site Information</div>
+                
+                <div class="form-group">
+                    <label>Site ID</label>
+                    <select id="siteId" required>
+                        <option value="">Select...</option>
+                        <option value="Site_1">Site 1</option>
+                        <option value="Site_2">Site 2</option>
+                        <option value="Site_3">Site 3</option>
+                        <option value="Site_4">Site 4</option>
+                        <option value="Site_5">Site 5</option>
+                        <option value="Site_6">Site 6</option>
+                        <option value="Site_7">Site 7</option>
+                        <option value="Site_8">Site 8</option>
+                        <option value="Site_9">Site 9</option>
+                        <option value="Site_10">Site 10</option>
+                        <option value="Site_11">Site 11</option>
+                        <option value="Site_12">Site 12</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Site Name</label>
+                    <input type="text" id="siteName" placeholder="e.g., Belcarra" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="date" required>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div class="form-group">
+                        <label>Start Time</label>
+                        <input type="time" id="timeStart" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>End Time</label>
+                        <input type="time" id="timeEnd" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Team Members Present</label>
+                    <input type="text" id="teamMembers" placeholder="Names of all team members" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>GPS Coordinates (Outfall)</label>
+                    <input type="text" id="gpsCoords" placeholder="Lat, Long (e.g., 49.3200, -122.8900)" required>
+                </div>
+            </div>
+            
+            <!-- Outfall Characteristics -->
+            <div class="card">
+                <div class="section-title">🚰 Outfall Characteristics</div>
+                
+                <div class="form-group">
+                    <label>Outfall Type</label>
+                    <select id="outfallType" required>
+                        <option value="">Select...</option>
+                        <option value="Natural_Stream">Natural Stream</option>
+                        <option value="Culverted_Stream">Culverted Stream</option>
+                        <option value="Stormwater_Pipe">Stormwater Pipe</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Outfall Width (m)</label>
+                    <input type="number" id="outfallWidth" step="0.1" placeholder="Width in meters" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Outfall Substrate</label>
+                    <input type="text" id="outfallSubstrate" placeholder="e.g., concrete, rock, mixed" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Flow Condition</label>
+                    <select id="flowCondition" required>
+                        <option value="">Select...</option>
+                        <option value="None">None</option>
+                        <option value="Trickle">Trickle</option>
+                        <option value="Moderate">Moderate</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Flow Evidence/Notes</label>
+                    <textarea id="flowEvidence" rows="2" placeholder="Staining, debris lines, algae growth, etc."></textarea>
+                </div>
+            </div>
+            
+            <!-- Site Configuration -->
+            <div class="card">
+                <div class="section-title">📏 Site Configuration</div>
+                
+                <div class="form-group">
+                    <label>Vertical Intertidal Range (m)</label>
+                    <input type="number" id="verticalRange" step="0.1" placeholder="High tide to low tide (m)" required>
+                    <p class="help-text">Measure from high tide debris line to low tide water level</p>
+                </div>
+                
+                <div class="form-group">
+                    <label>Site Type</label>
+                    <select id="siteType" required>
+                        <option value="">Select...</option>
+                        <option value="Full">Full (12 quadrats: Mid + Lower zones)</option>
+                        <option value="Compressed">Compressed (6 quadrats: 1 zone)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Zones Sampled</label>
+                    <input type="text" id="zonesSampled" placeholder="e.g., Mid + Lower" required>
+                </div>
+            </div>
+            
+            <!-- Disturbance Area -->
+            <div class="card">
+                <div class="section-title">⚠️ Disturbance Area</div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div class="form-group">
+                        <label>Width (m)</label>
+                        <input type="number" id="distWidth" step="0.1" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Length (m)</label>
+                        <input type="number" id="distLength" step="0.1" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Total Area (m²)</label>
+                    <input type="number" id="distArea" step="1" readonly>
+                    <p class="help-text">Auto-calculated from width × length</p>
+                </div>
+                
+                <div class="form-group">
+                    <label>Slope (rise/run = degrees)</label>
+                    <input type="text" id="slope" placeholder="e.g., 0.5m / 3m = 9.5°">
+                </div>
+            </div>
+            
+            <!-- Water Quality -->
+            <div class="card">
+                <div class="section-title">💧 Water Quality</div>
+                <p class="help-text">Take measurements at outfall discharge and reference location (~30m away)</p>
+                
+                <table class="wq-table">
+                    <tr>
+                        <th>Location</th>
+                        <th>Temp (°C)</th>
+                        <th>pH</th>
+                        <th>Salinity (ppt)</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Outfall</strong></td>
+                        <td><input type="number" id="wqOutfallTemp" step="0.1" required></td>
+                        <td><input type="number" id="wqOutfallPH" step="0.1" min="0" max="14" required></td>
+                        <td><input type="number" id="wqOutfallSal" step="0.1" required></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reference</strong></td>
+                        <td><input type="number" id="wqRefTemp" step="0.1" required></td>
+                        <td><input type="number" id="wqRefPH" step="0.1" min="0" max="14" required></td>
+                        <td><input type="number" id="wqRefSal" step="0.1" required></td>
+                    </tr>
+                </table>
+                
+                <div class="form-group" style="margin-top: 15px;">
+                    <label>Turbidity/Visual Observations</label>
+                    <textarea id="turbidity" rows="2" placeholder="Clear, slightly turbid, very turbid, color, smell, etc."></textarea>
+                </div>
+            </div>
+            
+            <!-- Environmental Conditions -->
+            <div class="card">
+                <div class="section-title">🌤️ Environmental Conditions</div>
+                
+                <div class="form-group">
+                    <label>Weather</label>
+                    <select id="weather" required>
+                        <option value="">Select...</option>
+                        <option value="Clear">Clear/Sunny</option>
+                        <option value="Partly_Cloudy">Partly Cloudy</option>
+                        <option value="Overcast">Overcast</option>
+                        <option value="Light_Rain">Light Rain</option>
+                        <option value="Rain">Rain</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Air Temperature (°C)</label>
+                    <input type="number" id="airTemp" step="0.1" required>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div class="form-group">
+                        <label>Days Since Rain</label>
+                        <input type="number" id="daysSinceRain" min="0" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Rain Amount (mm)</label>
+                        <input type="number" id="rainAmount" step="0.1">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Notes -->
+            <div class="card">
+                <div class="section-title">📝 Site Notes</div>
+                <textarea id="notes" rows="4" placeholder="General observations, access notes, hazards, special conditions, etc."></textarea>
+            </div>
+            
+            <button type="submit" class="button button-primary">
+                💾 Save Site Data
+            </button>
+        </form>
+        
+        <button class="button button-success" onclick="downloadSiteCSV()">
+            📥 Export Site Data
+        </button>
+        
+        <button class="button button-secondary" onclick="window.location.href='index_v2.html'">
+            ← Back to Quadrat Form
+        </button>
+    </div>
+    
+    <script>
+        let savedSites = JSON.parse(localStorage.getItem('beachBugsSites') || '[]');
+        
+        document.getElementById('date').valueAsDate = new Date();
+        
+        // Auto-calculate disturbance area
+        document.getElementById('distWidth').addEventListener('input', calcArea);
+        document.getElementById('distLength').addEventListener('input', calcArea);
+        
+        function calcArea() {
+            const width = parseFloat(document.getElementById('distWidth').value) || 0;
+            const length = parseFloat(document.getElementById('distLength').value) || 0;
+            document.getElementById('distArea').value = (width * length).toFixed(1);
+        }
+        
+        document.getElementById('siteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                timestamp: new Date().toISOString(),
+                siteId: document.getElementById('siteId').value,
+                siteName: document.getElementById('siteName').value,
+                date: document.getElementById('date').value,
+                timeStart: document.getElementById('timeStart').value,
+                timeEnd: document.getElementById('timeEnd').value,
+                teamMembers: document.getElementById('teamMembers').value,
+                gpsCoords: document.getElementById('gpsCoords').value,
+                outfallType: document.getElementById('outfallType').value,
+                outfallWidth: document.getElementById('outfallWidth').value,
+                outfallSubstrate: document.getElementById('outfallSubstrate').value,
+                flowCondition: document.getElementById('flowCondition').value,
+                flowEvidence: document.getElementById('flowEvidence').value,
+                verticalRange: document.getElementById('verticalRange').value,
+                siteType: document.getElementById('siteType').value,
+                zonesSampled: document.getElementById('zonesSampled').value,
+                distWidth: document.getElementById('distWidth').value,
+                distLength: document.getElementById('distLength').value,
+                distArea: document.getElementById('distArea').value,
+                slope: document.getElementById('slope').value,
+                wqOutfallTemp: document.getElementById('wqOutfallTemp').value,
+                wqOutfallPH: document.getElementById('wqOutfallPH').value,
+                wqOutfallSal: document.getElementById('wqOutfallSal').value,
+                wqRefTemp: document.getElementById('wqRefTemp').value,
+                wqRefPH: document.getElementById('wqRefPH').value,
+                wqRefSal: document.getElementById('wqRefSal').value,
+                turbidity: document.getElementById('turbidity').value,
+                weather: document.getElementById('weather').value,
+                airTemp: document.getElementById('airTemp').value,
+                daysSinceRain: document.getElementById('daysSinceRain').value,
+                rainAmount: document.getElementById('rainAmount').value,
+                notes: document.getElementById('notes').value
+            };
+            
+            savedSites.push(formData);
+            localStorage.setItem('beachBugsSites', JSON.stringify(savedSites));
+            
+            showStatusBar();
+            
+            document.getElementById('siteForm').reset();
+            document.getElementById('date').valueAsDate = new Date();
+            
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+        
+        function showStatusBar() {
+            const bar = document.getElementById('statusBar');
+            bar.classList.add('show');
+            setTimeout(() => bar.classList.remove('show'), 3000);
+        }
+        
+        function downloadSiteCSV() {
+            if (savedSites.length === 0) {
+                alert('No site data to export yet!');
+                return;
+            }
+            
+            const headers = ['Timestamp', 'Site_ID', 'Site_Name', 'Date', 'Time_Start', 'Time_End',
+                           'Team_Members', 'GPS_Coords', 'Outfall_Type', 'Outfall_Width_m',
+                           'Outfall_Substrate', 'Flow_Condition', 'Flow_Evidence',
+                           'Vertical_Range_m', 'Site_Type', 'Zones_Sampled',
+                           'Disturbance_Width_m', 'Disturbance_Length_m', 'Disturbance_Area_m2',
+                           'Slope', 'WQ_Outfall_Temp', 'WQ_Outfall_pH', 'WQ_Outfall_Salinity',
+                           'WQ_Reference_Temp', 'WQ_Reference_pH', 'WQ_Reference_Salinity',
+                           'Turbidity', 'Weather', 'Air_Temp_C', 'Days_Since_Rain', 'Rain_Amount_mm',
+                           'Notes'];
+            
+            let csv = headers.join(',') + '\n';
+            
+            savedSites.forEach(row => {
+                const values = [
+                    row.timestamp,
+                    row.siteId,
+                    `"${row.siteName}"`,
+                    row.date,
+                    row.timeStart,
+                    row.timeEnd,
+                    `"${row.teamMembers}"`,
+                    `"${row.gpsCoords}"`,
+                    row.outfallType,
+                    row.outfallWidth,
+                    `"${row.outfallSubstrate}"`,
+                    row.flowCondition,
+                    `"${row.flowEvidence || ''}"`,
+                    row.verticalRange,
+                    row.siteType,
+                    `"${row.zonesSampled}"`,
+                    row.distWidth,
+                    row.distLength,
+                    row.distArea,
+                    `"${row.slope || ''}"`,
+                    row.wqOutfallTemp,
+                    row.wqOutfallPH,
+                    row.wqOutfallSal,
+                    row.wqRefTemp,
+                    row.wqRefPH,
+                    row.wqRefSal,
+                    `"${row.turbidity || ''}"`,
+                    row.weather,
+                    row.airTemp,
+                    row.daysSinceRain,
+                    row.rainAmount || '',
+                    `"${row.notes || ''}"`
+                ];
+                csv += values.join(',') + '\n';
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `beach_bugs_sites_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            
+            alert(`Downloaded ${savedSites.length} site records!`);
+        }
+    </script>
+</body>
+</html>
